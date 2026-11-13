@@ -1,6 +1,6 @@
 # Builds the CurseForge modpack zip for «Осколок» from modlist.csv + cf-ids.txt.
 # Usage: powershell -ExecutionPolicy Bypass -File build-pack.ps1 [-Version 0.1.0]
-param([string]$Version = '0.1.2', [string]$NeoForge = '21.1.266')
+param([string]$Version = '0.1.3', [string]$NeoForge = '21.1.266')
 $ErrorActionPreference = 'Stop'
 $root  = Split-Path $PSScriptRoot -Parent          # D:\ari\oskolok
 $build = $PSScriptRoot
@@ -29,7 +29,12 @@ $extra = @(
     (X 'library' 'lib'   'OctoLib'                                  'shatterbyte-lib'       '916747:9588915:1'),
     (X 'library' 'lib'   'HaydenAPI'                                'haydenapi'             '1219737:6302841:1'),
     (X 'library' 'lib'   'Flight API'                               'flight-api'            '1219748:6891762:1'),
-    (X 'library' 'lib'   'Platform'                                 'platform'              '997634:9318519:1')
+    (X 'library' 'lib'   'Platform'                                 'platform'              '997634:9318519:1'),
+    # 0.1.3: shader packs for Iris (CurseForge installs them into shaderpacks/). Off by default, K toggles.
+    (X 'shader'  'shader' 'MakeUp - Ultra Fast'                     'makeup-ultra-fast-shader' '431203:9262057:1'),
+    (X 'shader'  'shader' 'BSL Shaders'                             'bsl-shaders'              '322506:8939313:1'),
+    (X 'shader'  'shader' 'Complementary Shaders - Reimagined'      'complementary-reimagined' '627557:8884654:1'),
+    (X 'shader'  'shader' 'Complementary Shaders - Unbound'         'complementary-unbound'    '385587:8884656:1')
 )
 
 $ids = @{}
@@ -74,6 +79,13 @@ $ov = "$build\overrides"
 if (Test-Path $ov) { Remove-Item $ov -Recurse -Force }
 New-Item -ItemType Directory -Force "$ov\config" | Out-Null
 [IO.File]::WriteAllText("$ov\config\oskolok-version.txt", "Oskolok $Version`n", $utf8)
+# Iris: shaders off by default (400 mods are heavy), Complementary Reimagined preselected so K turns it on
+$iris = @(
+    'disableUpdateMessage=true',
+    'enableShaders=false',
+    'shaderPack=ComplementaryReimagined_r5.9.3.zip'
+) -join "`n"
+[IO.File]::WriteAllText("$ov\config\iris.properties", "$iris`n", $utf8)
 
 # Zip with forward-slash entry names (Compress-Archive on PS 5.1 writes backslashes)
 Add-Type -AssemblyName System.IO.Compression, System.IO.Compression.FileSystem
