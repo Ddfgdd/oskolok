@@ -12,7 +12,7 @@
     "manifestType":  "minecraftModpack",
     "manifestVersion":  1,
     "name":  "Oskolok",
-    "version":  "0.1.0",
+    "version":  "0.1.1",
     "author":  "Oskolok team",
     "files":  [
                   {
@@ -193,11 +193,6 @@
                   {
                       "projectID":  363569,
                       "fileID":  7317672,
-                      "required":  true
-                  },
-                  {
-                      "projectID":  1405249,
-                      "fileID":  7336865,
                       "required":  true
                   },
                   {
@@ -473,11 +468,6 @@
                   {
                       "projectID":  1191845,
                       "fileID":  6148845,
-                      "required":  true
-                  },
-                  {
-                      "projectID":  511319,
-                      "fileID":  8891797,
                       "required":  true
                   },
                   {
@@ -1291,11 +1281,6 @@
                       "required":  true
                   },
                   {
-                      "projectID":  431725,
-                      "fileID":  8228816,
-                      "required":  true
-                  },
-                  {
                       "projectID":  278993,
                       "fileID":  7094632,
                       "required":  true
@@ -1313,11 +1298,6 @@
                   {
                       "projectID":  298187,
                       "fileID":  9310471,
-                      "required":  true
-                  },
-                  {
-                      "projectID":  282001,
-                      "fileID":  5714512,
                       "required":  true
                   },
                   {
@@ -2018,6 +1998,51 @@
                   {
                       "projectID":  522992,
                       "fileID":  7541336,
+                      "required":  true
+                  },
+                  {
+                      "projectID":  897116,
+                      "fileID":  7473565,
+                      "required":  true
+                  },
+                  {
+                      "projectID":  549225,
+                      "fileID":  7530361,
+                      "required":  true
+                  },
+                  {
+                      "projectID":  1145462,
+                      "fileID":  6880789,
+                      "required":  true
+                  },
+                  {
+                      "projectID":  661261,
+                      "fileID":  8611586,
+                      "required":  true
+                  },
+                  {
+                      "projectID":  576589,
+                      "fileID":  7140477,
+                      "required":  true
+                  },
+                  {
+                      "projectID":  916747,
+                      "fileID":  9588915,
+                      "required":  true
+                  },
+                  {
+                      "projectID":  1219737,
+                      "fileID":  6302841,
+                      "required":  true
+                  },
+                  {
+                      "projectID":  1219748,
+                      "fileID":  6891762,
+                      "required":  true
+                  },
+                  {
+                      "projectID":  997634,
+                      "fileID":  9318519,
                       "required":  true
                   }
               ],

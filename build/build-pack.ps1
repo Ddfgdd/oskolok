@@ -1,15 +1,33 @@
 # Builds the CurseForge modpack zip for «Осколок» from modlist.csv + cf-ids.txt.
 # Usage: powershell -ExecutionPolicy Bypass -File build-pack.ps1 [-Version 0.1.0]
-param([string]$Version = '0.1.0', [string]$NeoForge = '21.1.266')
+param([string]$Version = '0.1.1', [string]$NeoForge = '21.1.266')
 $ErrorActionPreference = 'Stop'
 $root  = Split-Path $PSScriptRoot -Parent          # D:\ari\oskolok
 $build = $PSScriptRoot
 $utf8  = New-Object System.Text.UTF8Encoding($false)
 
 # Mods removed from the pack on purpose (see plan doc)
-$exclude = @('miners-delight', 'noisium', 'alexs-delight')
-# Extra dependencies found on CurseForge that Modrinth did not list
-$extra = @([pscustomobject]@{ role = 'library'; category = 'lib'; mod = 'BlockUI'; source = 'CurseForge'; slug = 'blockui'; cf = '522992:7541336:1' })
+#  0.1.0: miners-delight (not on CurseForge), noisium (archived), alexs-delight (needs Alex's Mobs, no 1.21.1)
+#  0.1.1: reeses-sodium-options (incompatible with Sodium Options API),
+#         cc-tweaked (CurseForge only has 1.113.1, too old for Create: New Age / Advanced Peripherals),
+#         advanced-peripherals (needs CC: Tweaked 1.119+),
+#         mrcrayfishs-furniture-mod-tools-refurbished (addon; replaced by the main Refurbished Furniture mod)
+$exclude = @('miners-delight', 'noisium', 'alexs-delight',
+             'reeses-sodium-options', 'cc-tweaked', 'advanced-peripherals', 'mrcrayfishs-furniture-mod-tools-refurbished')
+# Extra mods/dependencies found on CurseForge (missing deps reported by NeoForge on first launch)
+function X($role, $cat, $name, $slug, $cf) { [pscustomobject]@{ role = $role; category = $cat; mod = $name; source = 'CurseForge'; slug = $slug; cf = $cf } }
+$extra = @(
+    (X 'library' 'lib'   'BlockUI'                                  'blockui'               '522992:7541336:1'),
+    (X 'content' 'decor' "MrCrayfish's Furniture Mod: Refurbished"  'refurbished-furniture' '897116:7473565:1'),
+    (X 'library' 'lib'   'Framework'                                'framework'             '549225:7530361:2'),
+    (X 'library' 'lib'   'Atlas API'                                'atlas-api'             '1145462:6880789:1'),
+    (X 'library' 'lib'   'FLib'                                     'flib'                  '661261:8611586:1'),
+    (X 'library' 'lib'   'PolyLib'                                  'polylib'               '576589:7140477:1'),
+    (X 'library' 'lib'   'OctoLib'                                  'shatterbyte-lib'       '916747:9588915:1'),
+    (X 'library' 'lib'   'HaydenAPI'                                'haydenapi'             '1219737:6302841:1'),
+    (X 'library' 'lib'   'Flight API'                               'flight-api'            '1219748:6891762:1'),
+    (X 'library' 'lib'   'Platform'                                 'platform'              '997634:9318519:1')
+)
 
 $ids = @{}
 foreach ($pair in ([IO.File]::ReadAllText("$build\cf-ids.txt").Trim() -split ',')) { $k, $v = $pair -split '=', 2; $ids[$k] = $v }
