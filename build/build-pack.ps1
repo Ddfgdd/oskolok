@@ -1,6 +1,6 @@
 # Builds the CurseForge modpack zip for «Осколок» from modlist.csv + cf-ids.txt.
 # Usage: powershell -ExecutionPolicy Bypass -File build-pack.ps1 [-Version 0.1.0]
-param([string]$Version = '0.1.1', [string]$NeoForge = '21.1.266')
+param([string]$Version = '0.1.2', [string]$NeoForge = '21.1.266')
 $ErrorActionPreference = 'Stop'
 $root  = Split-Path $PSScriptRoot -Parent          # D:\ari\oskolok
 $build = $PSScriptRoot
@@ -12,8 +12,11 @@ $utf8  = New-Object System.Text.UTF8Encoding($false)
 #         cc-tweaked (CurseForge only has 1.113.1, too old for Create: New Age / Advanced Peripherals),
 #         advanced-peripherals (needs CC: Tweaked 1.119+),
 #         mrcrayfishs-furniture-mod-tools-refurbished (addon; replaced by the main Refurbished Furniture mod)
+#  0.1.2: sodium-options-api (CurseForge build requires Reese's Sodium Options, which conflicts with it)
+#         and sodium-dynamic-lights (the only mod that needed Sodium Options API)
 $exclude = @('miners-delight', 'noisium', 'alexs-delight',
-             'reeses-sodium-options', 'cc-tweaked', 'advanced-peripherals', 'mrcrayfishs-furniture-mod-tools-refurbished')
+             'reeses-sodium-options', 'cc-tweaked', 'advanced-peripherals', 'mrcrayfishs-furniture-mod-tools-refurbished',
+             'sodium-options-api', 'sodium-dynamic-lights')
 # Extra mods/dependencies found on CurseForge (missing deps reported by NeoForge on first launch)
 function X($role, $cat, $name, $slug, $cf) { [pscustomobject]@{ role = $role; category = $cat; mod = $name; source = 'CurseForge'; slug = $slug; cf = $cf } }
 $extra = @(

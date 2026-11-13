@@ -12,7 +12,7 @@
     "manifestType":  "minecraftModpack",
     "manifestVersion":  1,
     "name":  "Oskolok",
-    "version":  "0.1.1",
+    "version":  "0.1.2",
     "author":  "Oskolok team",
     "files":  [
                   {
@@ -863,11 +863,6 @@
                   {
                       "projectID":  416089,
                       "fileID":  8601207,
-                      "required":  true
-                  },
-                  {
-                      "projectID":  551736,
-                      "fileID":  6044477,
                       "required":  true
                   },
                   {
@@ -1933,11 +1928,6 @@
                   {
                       "projectID":  661293,
                       "fileID":  7055149,
-                      "required":  true
-                  },
-                  {
-                      "projectID":  1103431,
-                      "fileID":  6100815,
                       "required":  true
                   },
                   {
