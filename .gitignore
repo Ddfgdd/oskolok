@@ -1,0 +1,2 @@
+# Built pack archives go to GitHub Releases, not into git
+build/*.zip
